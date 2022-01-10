@@ -2,3 +2,28 @@
 title: "TAPR data joins"
 output: html_notebook
 ---
+```{r}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(readxl)
+
+```
+
+```{r}
+read_excel(
+  "data-raw/DSTUD_2013_2014.xlsx"
+  )
+```
+
+```{r}
+# Create a vector of Excel files to read
+files.to.read = list.files(pattern="xlsx")
+
+# Read each file and write it to csv
+lapply(files.to.read, function(f) {
+  df = read_excel(f, sheet=1)
+  write.csv(df, gsub("xlsx", "csv", f), row.names=FALSE)
+})
+```
+
