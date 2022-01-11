@@ -8,17 +8,51 @@ library(janitor)
 library(lubridate)
 library(readxl)
 library("rio")
-
 ```
 
-```{r}
-read_excel(
-  "data-raw/DSTUD_2013_2014.xlsx"
-  )
-```
-
-# converting xlsx to csv using rio  
+# converting xlsx to csv using rio  (no need to repeat this step)
 ```{r} 
 xls <- dir(pattern = "xlsx")
 created <- mapply(convert, xls, gsub("xlsx", "csv", xls))
 ```
+
+# assign to variables and clean names (all lowercase)
+```{r}
+dstud_2013_2014 <- read_csv("data-raw/DSTUD_2013_2014.csv") %>% clean_names()
+dstud_2014_2015 <- read_csv("data-raw/DSTUD_2014_2015.csv") %>% clean_names()
+dstud_2015_2016 <- read_csv("data-raw/DSTUD_2015_2016.csv") %>% clean_names()
+dstud_2016_2017 <- read_csv("data-raw/DSTUD_2016_2017.csv") %>% clean_names()
+dstud_2017_2018 <- read_csv("data-raw/DSTUD_2017_2018.csv") %>% clean_names()
+dstud_2018_2019 <- read_csv("data-raw/DSTUD_2018_2019.csv") %>% clean_names()
+dstud_2019_2020 <- read_csv("data-raw/DSTUD_2019_2020.csv") %>% clean_names()
+dstud_2020_2021 <- read_csv("data-raw/DSTUD_2020_2021.csv") %>% clean_names()
+```
+
+
+# adding year column and populating
+```{r}
+dstud_2013_2014['school_year'] <- "2013_2014"
+dstud_2014_2015['school_year'] <- "2014_2015"
+dstud_2015_2016['school_year'] <- "2015_2016"
+dstud_2016_2017['school_year'] <- "2016_2017"
+dstud_2017_2018['school_year'] <- "2017_2018"
+dstud_2018_2019['school_year'] <- "2018_2019"
+dstud_2019_2020['school_year'] <- "2019_2020"
+dstud_2020_2021['school_year'] <- "2020_2021"
+
+```
+
+# selecting enrollment only DPETALLC (total student count) and DISTRICT
+```{r}
+enrollment_2013_2014 <- dstud_2013_2014 %>% select(district, dpetallc, school_year)
+enrollment_2014_2015 <- dstud_2014_2015 %>% select(district, dpetallc, school_year)
+enrollment_2015_2016 <- dstud_2015_2016 %>% select(district, dpetallc, school_year)
+enrollment_2016_2017 <- dstud_2016_2017 %>% select(district, dpetallc, school_year)
+enrollment_2017_2018 <- dstud_2017_2018 %>% select(district, dpetallc, school_year)
+enrollment_2018_2019 <- dstud_2018_2019 %>% select(district, dpetallc, school_year)
+enrollment_2019_2020 <- dstud_2019_2020 %>% select(district, dpetallc, school_year)
+enrollment_2020_2021 <- dstud_2020_2021 %>% select(district, dpetallc, school_year)
+
+```
+
+

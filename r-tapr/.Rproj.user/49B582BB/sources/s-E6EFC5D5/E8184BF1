@@ -1,11 +1,11 @@
 {
     "id": "E8184BF1",
-    "path": "~/Documents/TAPR-data/r-tapr/tapr-joins.Rmd",
-    "project_path": "tapr-joins.Rmd",
+    "path": "~/Documents/TAPR-data/r-tapr/tapr-import-cleaning.Rmd",
+    "project_path": "tapr-import-cleaning.Rmd",
     "type": "r_markdown",
-    "hash": "0",
+    "hash": "3890648028",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1641853000334.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -14,15 +14,15 @@
         "chunk_output_type": "inline",
         "source_window_id": "",
         "Source": "Source",
-        "cursorPosition": "35,0",
-        "scrollLine": "26"
+        "cursorPosition": "67,0",
+        "scrollLine": "56"
     },
     "folds": "",
-    "lastKnownWriteTime": 1641933044,
+    "lastKnownWriteTime": 1641943061,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1641934061625,
+    "last_content_update": 1641943061233,
     "read_only": false,
     "read_only_alternatives": []
 }

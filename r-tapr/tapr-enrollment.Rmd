@@ -1,0 +1,29 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+```{r}
+library(tidyverse)
+library(janitor)
+library(lubridate)
+library(readxl)
+library("rio")
+```
+
+```{r}
+enrollment  <- read_rds("data-processed/enrollment_all_years.rds")
+```
+
+```{r}
+enrollment %>% glimpse()
+```
+
+```{r}
+enrollment %>% pivot_wider(
+  names_from= school_year, 
+  values_from=c(district, total_students), 
+  values_fill = 0
+)
+```
+
