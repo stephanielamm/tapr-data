@@ -7,6 +7,7 @@ library(tidyverse)
 library(janitor)
 library(lubridate)
 library(readxl)
+library("rio")
 
 ```
 
@@ -16,14 +17,25 @@ read_excel(
   )
 ```
 
-```{r}
-# Create a vector of Excel files to read
-files.to.read = list.files(pattern="xlsx")
+# converting xlsx to csv using rio  
+```{r} 
+xls <- dir(pattern = "xlsx")
+created <- mapply(convert, xls, gsub("xlsx", "csv", xls))
+```
 
-# Read each file and write it to csv
-lapply(files.to.read, function(f) {
-  df = read_excel(f, sheet=1)
-  write.csv(df, gsub("xlsx", "csv", f), row.names=FALSE)
-})
+# assign to variables 
+```{r}
+dstud_2013_2014 <- read_csv("data-raw/DSTUD_2013_2014.csv")
+dstud_2014_2015 <- read_csv("data-raw/DSTUD_2014_2015.csv")
+dstud_2015_2016 <- read_csv("data-raw/DSTUD_2015_2016.csv")
+dstud_2016_2017 <- read_csv("data-raw/DSTUD_2016_2017.csv")
+dstud_2017_2018 <- read_csv("data-raw/DSTUD_2017_2018.csv")
+dstud_2018_2019 <- read_csv("data-raw/DSTUD_2018_2019.csv")
+dstud_2019_2020 <- read_csv("data-raw/DSTUD_2019_2020.csv")
+dstud_2020_2021 <- read_csv("data-raw/DSTUD_2020_2021.csv")
+```
+
+```{r}
+rm(dstud_2020_2021)
 ```
 

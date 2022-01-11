@@ -217,11 +217,12 @@ pre code {
 <!-- rnb-text-begin -->
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGphbml0b3IpXG5saWJyYXJ5KGx1YnJpZGF0ZSlcbmxpYnJhcnkocmVhZHhsKVxuXG5gYGAifQ== -->
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxubGlicmFyeSh0aWR5dmVyc2UpXG5saWJyYXJ5KGphbml0b3IpXG5saWJyYXJ5KGx1YnJpZGF0ZSlcbmxpYnJhcnkocmVhZHhsKVxubGlicmFyeShcInJpb1wiKVxuXG5gYGAifQ== -->
 <pre class="r"><code>library(tidyverse)
 library(janitor)
 library(lubridate)
 library(readxl)
+library(&quot;rio&quot;)
 </code></pre>
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
@@ -235,26 +236,18 @@ library(readxl)
 <!-- rnb-source-end -->
 <!-- rnb-chunk-end -->
 <!-- rnb-text-begin -->
+<div id="converting-xlsx-to-csv-using-rio" class="section level1">
+<h1>converting xlsx to csv using rio</h1>
 <!-- rnb-text-end -->
 <!-- rnb-chunk-begin -->
-<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxuIyBDcmVhdGUgYSB2ZWN0b3Igb2YgRXhjZWwgZmlsZXMgdG8gcmVhZFxuZmlsZXMudG8ucmVhZCA9IGxpc3QuZmlsZXMocGF0dGVybj1cInhsc3hcIilcblxuIyBSZWFkIGVhY2ggZmlsZSBhbmQgd3JpdGUgaXQgdG8gY3N2XG5sYXBwbHkoZmlsZXMudG8ucmVhZCwgZnVuY3Rpb24oZikge1xuICBkZiA9IHJlYWRfZXhjZWwoZiwgc2hlZXQ9MSlcbiAgd3JpdGUuY3N2KGRmLCBnc3ViKFwieGxzeFwiLCBcImNzdlwiLCBmKSwgcm93Lm5hbWVzPUZBTFNFKVxufSlcbmBgYCJ9 -->
-<pre class="r"><code># Create a vector of Excel files to read
-files.to.read = list.files(pattern=&quot;xlsx&quot;)
-
-# Read each file and write it to csv
-lapply(files.to.read, function(f) {
-  df = read_excel(f, sheet=1)
-  write.csv(df, gsub(&quot;xlsx&quot;, &quot;csv&quot;, f), row.names=FALSE)
-})</code></pre>
+<!-- rnb-source-begin eyJkYXRhIjoiYGBgclxueGxzIDwtIGRpcihwYXR0ZXJuID0gXCJ4bHN4XCIpXG5jcmVhdGVkIDwtIG1hcHBseShjb252ZXJ0LCB4bHMsIGdzdWIoXCJ4bHN4XCIsIFwiY3N2XCIsIHhscykpXG5gYGAifQ== -->
+<pre class="r"><code>xls &lt;- dir(pattern = &quot;xlsx&quot;)
+created &lt;- mapply(convert, xls, gsub(&quot;xlsx&quot;, &quot;csv&quot;, xls))</code></pre>
 <!-- rnb-source-end -->
-<!-- rnb-output-begin eyJkYXRhIjoibGlzdCgpXG4ifQ== -->
-<pre><code>list()</code></pre>
-<!-- rnb-output-end -->
 <!-- rnb-chunk-end -->
-<!-- rnb-text-begin -->
-<!-- rnb-text-end -->
+</div>
 
-<div id="rmd-source-code">LS0tCnRpdGxlOiAiVEFQUiBkYXRhIGpvaW5zIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShqYW5pdG9yKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShyZWFkeGwpCgpgYGAKCmBgYHtyfQpyZWFkX2V4Y2VsKAogICJkYXRhLXJhdy9EU1RVRF8yMDEzXzIwMTQueGxzeCIKICApCmBgYAoKYGBge3J9CiMgQ3JlYXRlIGEgdmVjdG9yIG9mIEV4Y2VsIGZpbGVzIHRvIHJlYWQKZmlsZXMudG8ucmVhZCA9IGxpc3QuZmlsZXMocGF0dGVybj0ieGxzeCIpCgojIFJlYWQgZWFjaCBmaWxlIGFuZCB3cml0ZSBpdCB0byBjc3YKbGFwcGx5KGZpbGVzLnRvLnJlYWQsIGZ1bmN0aW9uKGYpIHsKICBkZiA9IHJlYWRfZXhjZWwoZiwgc2hlZXQ9MSkKICB3cml0ZS5jc3YoZGYsIGdzdWIoInhsc3giLCAiY3N2IiwgZiksIHJvdy5uYW1lcz1GQUxTRSkKfSkKYGBgCgo=</div>
+<div id="rmd-source-code">LS0tCnRpdGxlOiAiVEFQUiBkYXRhIGpvaW5zIgpvdXRwdXQ6IGh0bWxfbm90ZWJvb2sKLS0tCmBgYHtyfQpsaWJyYXJ5KHRpZHl2ZXJzZSkKbGlicmFyeShqYW5pdG9yKQpsaWJyYXJ5KGx1YnJpZGF0ZSkKbGlicmFyeShyZWFkeGwpCmxpYnJhcnkoInJpbyIpCgpgYGAKCmBgYHtyfQpyZWFkX2V4Y2VsKAogICJkYXRhLXJhdy9EU1RVRF8yMDEzXzIwMTQueGxzeCIKICApCmBgYAoKIyBjb252ZXJ0aW5nIHhsc3ggdG8gY3N2IHVzaW5nIHJpbyAgCmBgYHtyfSAKeGxzIDwtIGRpcihwYXR0ZXJuID0gInhsc3giKQpjcmVhdGVkIDwtIG1hcHBseShjb252ZXJ0LCB4bHMsIGdzdWIoInhsc3giLCAiY3N2IiwgeGxzKSkKYGBgCg==</div>
 
 
 
